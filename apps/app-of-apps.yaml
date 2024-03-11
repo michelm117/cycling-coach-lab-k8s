@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/michelm117/cycling-coach-lab-k8s'
+    path: apps
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      jsonnet: {}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
