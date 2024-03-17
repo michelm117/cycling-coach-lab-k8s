@@ -7,12 +7,8 @@ spec:
   project: default
   sources:
     - repoURL: 'https://github.com/michelm117/cycling-coach-lab'
-      path: cycling-coach-lab
+      path: deployments/cycling-coach-lab
       targetRevision: HEAD
-      helm:
-        valuesObject:
-          image:
-            tag: '1.2.2'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: newtri-science
