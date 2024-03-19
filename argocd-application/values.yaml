@@ -1,2 +1,3 @@
-name: review
+name: ccl
+subDomain: ccl
 targetRevision: HEAD

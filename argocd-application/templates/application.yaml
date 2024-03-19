@@ -9,6 +9,21 @@ spec:
     - repoURL: 'https://github.com/michelm117/cycling-coach-lab'
       path: deployments/cycling-coach-lab
       targetRevision: {{ .Values.targetRevision }}
+      valuesObject:
+        ingress:
+          enabled: true
+          className: ""
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+          hosts:
+            - host: {{ .Values.subDomain }}.newtri-science.michel.lu
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+           - secretName: cycling-coach-lab-tls
+             hosts:
+               - {{ .Values.subDomain }}.newtri-science.michel.lu
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: newtri-science
