@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.name }}
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: 'https://github.com/michelm117/cycling-coach-lab'
+      path: deployments/cycling-coach-lab
+      targetRevision: {{ .Values.targetRevision }}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: newtri-science
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
