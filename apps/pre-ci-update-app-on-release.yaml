@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: review-pre-ci-update-app-on-release
+  name: pre-ci-update-app-on-release
   namespace: argocd
 spec:
   project: default
