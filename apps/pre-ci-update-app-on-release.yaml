@@ -13,6 +13,12 @@ spec:
     targetRevision: ci/update-app-on-release
     helm:
       valuesObject:
+        image:
+          tag: pre-ci-update-app-on-release
+        postgresql:
+          persistence:
+            enabled: false
+            size: 512Mi
         ingress:
           enabled: true
           className: ""
@@ -24,7 +30,7 @@ spec:
                 - path: /
                   pathType: Prefix
           tls:
-            - secretName: cycling-coach-lab-tls
+            - secretName: ccl-review-{{ .Values.name }}-tls
               hosts:
                 - pre-ci-update-app-on-release.newtri-science.michel.lu
   destination:
