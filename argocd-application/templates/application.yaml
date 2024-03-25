@@ -16,6 +16,7 @@ spec:
         postgresql:
           persistence:
             enabled: {{ .Values.postgresql.persistence.enabled }}
+            size: 512Mi
         ingress:
           enabled: true
           className: ""
@@ -27,7 +28,7 @@ spec:
                 - path: /
                   pathType: Prefix
           tls:
-            - secretName: ccl-review-{{ .Values.name }}-tls
+            - secretName: {{ .Values.ingress.tls.secretName }}
               hosts:
                 - {{ .Values.subDomain }}.newtri-science.michel.lu
   destination:
