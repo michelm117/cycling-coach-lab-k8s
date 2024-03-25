@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/michelm117/cycling-coach-lab'
       path: deployments/cycling-coach-lab
-      targetRevision: pre-ci-update-app-on-release
+      targetRevision: ci/update-app-on-release
       valuesObject:
         ingress:
           enabled: true
