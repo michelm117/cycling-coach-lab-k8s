@@ -30,7 +30,7 @@ spec:
                 - path: /
                   pathType: Prefix
           tls:
-            - secretName: ccl-review-{{ .Values.name }}-tls
+            - secretName: ccl-review-pre-ci-update-app-on-release-tls
               hosts:
                 - pre-ci-update-app-on-release.newtri-science.michel.lu
   destination:
