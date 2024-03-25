@@ -11,6 +11,11 @@ spec:
     targetRevision: {{ .Values.targetRevision }}
     helm:
       valuesObject:
+        image:
+          tag: {{ .Values.image.tag }}
+        postgresql:
+          persistence:
+            enabled: {{ .Values.postgresql.persistence.enabled }}
         ingress:
           enabled: true
           className: ""
@@ -22,7 +27,7 @@ spec:
                 - path: /
                   pathType: Prefix
           tls:
-            - secretName: cycling-coach-lab-tls
+            - secretName: ccl-review-{{ .Values.name }}-tls
               hosts:
                 - {{ .Values.subDomain }}.newtri-science.michel.lu
   destination:
