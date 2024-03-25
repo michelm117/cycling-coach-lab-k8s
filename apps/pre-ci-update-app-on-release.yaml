@@ -1,1 +1,44 @@
-
+---
+# Source: argo-cd-deployment/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pre-ci-update-app-on-release
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/michelm117/cycling-coach-lab'
+    path: deployments/cycling-coach-lab
+    targetRevision: ci/update-app-on-release
+    helm:
+      valuesObject:
+        image:
+          tag: pre-ci-update-app-on-release
+        postgresql:
+          persistence:
+            enabled: false
+            size: 512Mi
+        ingress:
+          enabled: true
+          className: ""
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+          hosts:
+            - host: pre-ci-update-app-on-release.newtri-science.michel.lu
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: ccl-review-pre-ci-update-app-on-release-tls
+              hosts:
+                - pre-ci-update-app-on-release.newtri-science.michel.lu
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: newtri-science
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
