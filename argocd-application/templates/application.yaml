@@ -5,10 +5,11 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
-    - repoURL: 'https://github.com/michelm117/cycling-coach-lab'
-      path: deployments/cycling-coach-lab
-      targetRevision: {{ .Values.targetRevision }}
+  source:
+    repoURL: 'https://github.com/michelm117/cycling-coach-lab'
+    path: deployments/cycling-coach-lab
+    targetRevision: {{ .Values.targetRevision }}
+    helm:
       valuesObject:
         ingress:
           enabled: true
@@ -21,9 +22,9 @@ spec:
                 - path: /
                   pathType: Prefix
           tls:
-           - secretName: cycling-coach-lab-tls
-             hosts:
-               - {{ .Values.subDomain }}.newtri-science.michel.lu
+            - secretName: cycling-coach-lab-tls
+              hosts:
+                - {{ .Values.subDomain }}.newtri-science.michel.lu
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: newtri-science
