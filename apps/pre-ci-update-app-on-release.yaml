@@ -13,13 +13,14 @@ spec:
     targetRevision: ci/update-app-on-release
     helm:
       valuesObject:
-        version: 656dd4c
+        version: 176b90d
         image:
           tag: pre-ci-update-app-on-release
         postgresql:
-          persistence:
-            enabled: false
-            size: 512Mi
+          primary:
+            persistence:
+              enabled: false
+              size: 512Mi
         ingress:
           enabled: true
           className: ""
