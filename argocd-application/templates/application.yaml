@@ -11,6 +11,7 @@ spec:
     targetRevision: {{ .Values.targetRevision }}
     helm:
       valuesObject:
+        version: {{ .Values.version }}
         image:
           tag: {{ .Values.image.tag }}
         postgresql:
