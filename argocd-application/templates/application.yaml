@@ -15,9 +15,10 @@ spec:
         image:
           tag: {{ .Values.image.tag }}
         postgresql:
-          persistence:
-            enabled: {{ .Values.postgresql.persistence.enabled }}
-            size: 512Mi
+          primary:
+            persistence:
+              enabled: {{ .Values.postgresql.persistence.enabled }}
+              size: 512Mi
         ingress:
           enabled: true
           className: ""
